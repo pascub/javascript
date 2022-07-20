@@ -88,3 +88,20 @@ carrito.sort ((a, b) => {
     return 0;
 })
 )
+
+                // DOM
+
+let inicio = document.getElementById("inicio");
+
+let seccion = prompt("Ingrese la sección deseada")
+
+if (seccion === "carrito"){
+    inicio.innerHTML = "<div> <h1>Usted se encuentra en el carrito de compras</h1> <ul> <li>televisor</li> <li>cafetera</li> <li>microondas</li> <li>tostadora</li>  </ul> </div>";
+    inicio.className = "carrito"
+} else if (seccion === "favoritos"){
+    inicio.innerHTML = "<h1>Usted se encuentra en sus favoritos</h1>"
+    inicio.className = "favoritos"
+}else {
+    saludo.innerHTML = "<h1>Bienvenido a nuestra pagina principal</h1>"
+}
+
