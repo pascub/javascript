@@ -91,17 +91,33 @@ carrito.sort ((a, b) => {
 
                 // DOM
 
-let inicio = document.getElementById("inicio");
+// let inicio = document.getElementById("inicio");
 
-let seccion = prompt("Ingrese la sección deseada")
+// let seccion = prompt("Ingrese la sección deseada")
 
-if (seccion === "carrito"){
-    inicio.innerHTML = "<div> <h1>Usted se encuentra en el carrito de compras</h1> <ul> <li>televisor</li> <li>cafetera</li> <li>microondas</li> <li>tostadora</li>  </ul> </div>";
-    inicio.className = "carrito"
-} else if (seccion === "favoritos"){
-    inicio.innerHTML = "<h1>Usted se encuentra en sus favoritos</h1>"
-    inicio.className = "favoritos"
-}else {
-    saludo.innerHTML = "<h1>Bienvenido a nuestra pagina principal</h1>"
+// if (seccion === "carrito"){
+//     inicio.innerHTML = "<div> <h1>Usted se encuentra en el carrito de compras</h1> <ul> <li>televisor</li> <li>cafetera</li> <li>microondas</li> <li>tostadora</li>  </ul> </div>";
+//     inicio.className = "carrito"
+// } else if (seccion === "favoritos"){
+//     inicio.innerHTML = "<h1>Usted se encuentra en sus favoritos</h1>"
+//     inicio.className = "favoritos"
+// }else {
+//     saludo.innerHTML = "<h1>Bienvenido a nuestra pagina principal</h1>"
+// }
+
+let formulario = document.getElementById("formulario");
+formulario.addEventListener("submit", formularioEditado);
+
+function formularioEditado(e){
+    e.preventDefault();
+    if (e.target.children[0].value.includes("@")){
+        let mensaje = document.createElement("div");
+        mensaje.innerHTMl = "Se ha registrado correctamente";
+        document.body.append(mensaje);
+    }else {
+        let mensaje = document.createElement("div");
+        mensaje.innerHTML = "ingresar un correo válido";
+        document.body.append(mensaje);
+        e.target.children[0].value = "";
+    }
 }
-
