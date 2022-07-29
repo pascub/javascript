@@ -105,19 +105,60 @@ carrito.sort ((a, b) => {
 //     saludo.innerHTML = "<h1>Bienvenido a nuestra pagina principal</h1>"
 // }
 
-let formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", formularioEditado);
+// let formulario = document.getElementById("formulario");
+// formulario.addEventListener("submit", formularioEditado);
 
-function formularioEditado(e){
+// function formularioEditado(e){
+//     e.preventDefault();
+//     if (e.target.children[0].value.includes("@")){
+//         let mensaje = document.createElement("div");
+//         mensaje.innerHTMl = "Se ha registrado correctamente";
+//         document.body.append(mensaje);
+//     }else {
+//         let mensaje = document.createElement("div");
+//         mensaje.innerHTML = "ingresar un correo válido";
+//         document.body.append(mensaje);
+//         e.target.children[0].value = "";
+//     }
+// }
+
+        // TRAE ELEMENTOS HTML
+let formulario = document.getElementById("formulario");
+let boton = document.getElementById("verProductos");
+let contenedor = document.getElementById("contenedor");
+
+formulario.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (e.target.children[0].value.includes("@")){
-        let mensaje = document.createElement("div");
-        mensaje.innerHTMl = "Se ha registrado correctamente";
-        document.body.append(mensaje);
+        // TRAE LOS PRODUCTOS DEL LOCALSTORAGE
+    let listaProductos;
+    let productosStorage = JSON.parse(localStorage.getItem("productos"));
+    
+    if (productosStorage){
+        listaProductos = productosStorage;
     }else {
-        let mensaje = document.createElement("div");
-        mensaje.innerHTML = "ingresar un correo válido";
-        document.body.append(mensaje);
-        e.target.children[0].value = "";
+        listaProductos = [];
     }
-}
+
+        let producto = {
+            id: listaProductos.length + 1,
+            nombre: e.target.children [0].value,
+            precio: e.target.children [1].value
+    }
+
+    listaProductos.push(producto);
+    localStorage.setItem("productos", JSON.stringify(listaProductos))
+    
+})
+
+boton.addEventListener("click", () => {
+    contenedor.innerHTML = "";
+    let productos = JSON.parse(localStorage.getItem("productos"));
+
+    productos.forEach(element => {
+        let item = document.createElement("div");
+        item.innerHTML = `id: ${element.id}
+                          nombre: ${element.nombre}
+                          precio: $${element.precio}`
+        contenedor.append(item);
+    })
+})
