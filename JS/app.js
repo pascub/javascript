@@ -6,7 +6,6 @@ import { carritoIndex } from './carritoIndex.js';
 const mostrarProductos = (productos) => {
     const contenedorProductos = document.getElementById('producto-contenedor');
     
-    // let productos = JSON.parse(localStorage.getItem("productos")); NO FUNCIONAAA
     
 
     productos.forEach( producto => {
@@ -26,14 +25,29 @@ const mostrarProductos = (productos) => {
 
     const boton = document.getElementById(`boton${producto.id}`)
     boton.addEventListener('click', ()=>{
-        carritoIndex(producto.id)
-        alert(`Se agrego ${producto.nombre}`)
-
-    } )
+        
+        Swal.fire({
+            title: '¿Quieres añadirlo al carrito?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Si, guardar',
+            denyButtonText: `No, no guardar`,
+          }).then((result) => {
+            
+            if (result.isConfirmed) {
+              Swal.fire('Guardado')
+              carritoIndex(producto.id)
+            } else if (result.isDenied) {
+              Swal.fire('No se guardó')
+            }
+          })
+    })
 
     } )
 
 }
-
 mostrarProductos(productos)
+
+
+
 
