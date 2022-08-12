@@ -1,14 +1,14 @@
-import { productos } from './stock.js' 
+// import { productos } from './stock.js' 
 import { carritoIndex } from './carritoIndex.js';
 
 
-
-const mostrarProductos = (productos) => {
+// const mostrarProductos = (productos) => {
     const contenedorProductos = document.getElementById('producto-contenedor');
     
-    
-
-    productos.forEach( producto => {
+    fetch("./data.json")
+    .then(response => response.json())
+    .then(productos => {
+      productos.forEach( producto => {
         const div = document.createElement('div')
         div.classList.add('card')
         div.innerHTML += `<div class="card" style="width: 18rem;">
@@ -21,7 +21,7 @@ const mostrarProductos = (productos) => {
                             </div>
                         </div>`
     
-    contenedorProductos.appendChild(div)
+    contenedorProductos.appendChild(div);
 
     const boton = document.getElementById(`boton${producto.id}`)
     boton.addEventListener('click', ()=>{
@@ -42,11 +42,10 @@ const mostrarProductos = (productos) => {
             }
           })
     })
-
-    } )
-
-}
-mostrarProductos(productos)
+  })
+})
+// }
+// mostrarProductos(productos)
 
 
 
