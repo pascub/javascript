@@ -7,8 +7,6 @@ const cerrarCarrito = document.getElementById('cerrar')
 const modalCarrito = document.querySelector('.modal-carrito')
 
 
-
-
 abrirCarrito.addEventListener('click', ()=>{
     modalContenedor.classList.toggle('modal-active')
 })
@@ -23,4 +21,12 @@ modalContenedor.addEventListener('click',() =>{
 
 modalCarrito.addEventListener('click', (e) =>{
     e.stopPropagation();
+})
+
+const botonEliminar = document.getElementById(`eliminar${item.id}`)
+
+const productoEnCarrito = document.getElementsByClassName('productoEnCarrito')
+
+botonEliminar.addEventListener("click", () => { 
+    productoEnCarrito.classList.remove();
 })

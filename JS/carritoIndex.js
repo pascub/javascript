@@ -1,7 +1,18 @@
-// import { productos } from "./stock.js";
+import { productos } from "./stock.js";
+
 
 let carritoCompras = [];
+document.addEventListener('DOMContentLoaded', () => {
+       fetchData()
+       if (localStorage.getItem("carrito")) {
+        carrito = JSON.parse(localStorage.getItem("carrito"))
+        carritoIndex()
+       }
+}
+)
+
                                 // RENDERIZAR CARRITO
+
 
 export const carritoIndex = (productoId) =>{
     const contenedorCarrito = document.getElementById("carrito-contenedor")
@@ -11,11 +22,9 @@ export const carritoIndex = (productoId) =>{
         carritoCompras.push(producto);
 
         producto.cantidad = 1;
-        fetch("./data.json")
-        .then(response => response.json())
-        .then(productos => {
-            productos.array.forEach(producto => {
+       
                 let div = document.createElement('div');
+                
                 div.classList.add('productoEnCarrito');
                 div.innerHTML = `<p>${producto.nombre}</p>
                         <p>Precio: ${producto.precio}</p> 
@@ -23,31 +32,10 @@ export const carritoIndex = (productoId) =>{
                         <button id="eliminar${producto.id}" class="boton-eliminar" ><i class="fa-solid fa-trash-can"></i></button>
             `
         contenedorCarrito.appendChild(div);
-
-        // this.guardarProductosLocalStorage(producto);
-
-            })
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+            }
         renderProductoCarrito();
-        })
-    };
-};
-
-                // ALMACENAR EN LOCAL STORAGE
         
-    // function guardarProductosLocalStorage(){
-    //     let productos;
-    //     productos = this.obtenerProductosLocalStorage();
-    //     productos.push(producto);
-    //     localStorage.setItem('productos', JSON.stringify(productos));
-    // }
+        }
+    
 
-    // function obtenerProductosLocalStorage () {
-    //     let productoLS;
-    //     if (localStorage.getItem('productos') === null){
-    //         productoLS = [];
-    //     }
-    //     else {
-    //         productoLS = JSON.parse(localStorage.getItem('productos'));
-    //     }
-    //     return productoLS;
-    // }
